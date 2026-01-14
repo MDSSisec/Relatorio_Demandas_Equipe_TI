@@ -40,10 +40,11 @@
         }
         
         .header h1 {
-            font-size: 2.25em;
+            font-size: 3.5em;
             font-weight: 700;
             margin-bottom: 8px;
             letter-spacing: -0.5px;
+            text-align: center;
         }
         
         .header .subtitle {
@@ -346,7 +347,7 @@
         <div class="header">
             <h1>Relatório de Demandas - Equipe TI</h1>
             <p class="subtitle">Análise de Dados e Métricas de Performance</p>
-            <p class="date">Data de geração: 14/01/2026 às 11:55</p>
+            <p class="date">Data de geração: 14/01/2026 às 14:40</p>
         </div>
         
         <div class="content">
@@ -399,43 +400,12 @@
             <div class="charts-grid">
                 <div class="chart-container">
                     <div class="chart-description">
-                        <h3>Análise: Demandas por Categoria</h3>
-                        <p>
-                            Este gráfico apresenta a distribuição das demandas por categoria/lista do Trello. 
-                            A categoria <strong>Concluído</strong> concentra a maior quantidade de demandas, 
-                            com <strong>97 demandas</strong> (83.6% do total). 
-                            Esta visualização ajuda a identificar onde a equipe está mais focada e quais áreas demandam mais atenção.
-                        </p>
-                    </div>
-                    <h2>Distribuição de Demandas por Categoria</h2>
-                    <div class="chart-wrapper">
-                        <canvas id="chartCategorias"></canvas>
-                    </div>
-                </div>
-                
-                <div class="chart-container">
-                    <div class="chart-description">
-                        <h3>Análise: Status das Demandas</h3>
-                        <p>
-                            Este gráfico de pizza mostra a proporção entre demandas abertas e fechadas. 
-                            Atualmente, <strong>93 demandas (80.2%)</strong> estão fechadas, 
-                            enquanto <strong>23 demandas (19.8%)</strong> estão em andamento. 
-                            Este indicador é importante para avaliar a capacidade de entrega e o volume de trabalho em execução.
-                        </p>
-                    </div>
-                    <h2>Status Geral das Demandas</h2>
-                    <div class="chart-wrapper">
-                        <canvas id="chartStatus"></canvas>
-                    </div>
-                </div>
-                
-                <div class="chart-container">
-                    <div class="chart-description">
                         <h3>Análise: Demandas por Setor</h3>
                         <p>
                             Este gráfico apresenta a distribuição das demandas entre os setores: DAIT, GABINETE, NAG e DAE. 
                             O setor <strong>DAIT</strong> possui a maior quantidade de demandas, 
                             com <strong>64 demandas</strong> (62.1% do total de demandas por setor). 
+                            Em segundo lugar, o setor <strong>DAE</strong> possui <strong>24 demandas</strong> (23.3% do total de demandas por setor). 
                             Esta análise permite identificar quais setores demandam mais atenção da equipe de TI.
                         </p>
                     </div>
@@ -459,6 +429,39 @@
                         <canvas id="chartSetoresStatus"></canvas>
                     </div>
                 </div>
+                
+                <div class="chart-container">
+                    <div class="chart-description">
+                        <h3>Análise: Status das Demandas</h3>
+                        <p>
+                            Este gráfico de pizza mostra a proporção entre demandas abertas e fechadas. 
+                            Atualmente, <strong>93 demandas (80.2%)</strong> estão fechadas, 
+                            enquanto <strong>23 demandas (19.8%)</strong> estão em andamento. 
+                            Este indicador é importante para avaliar a capacidade de entrega e o volume de trabalho em execução.
+                        </p>
+                    </div>
+                    <h2>Status Geral das Demandas</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="chartStatus"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-description">
+                        <h3>Análise: Demandas por Categoria</h3>
+                        <p>
+                            Este gráfico apresenta a distribuição das demandas por status no Trello, mostrando onde estão as demandas: 
+                            se estão em andamento, se estão pausadas, ou se já foram finalizadas (concluídas). 
+                            A categoria <strong>Concluído</strong> concentra a maior quantidade de demandas, 
+                            com <strong>97 demandas</strong> (87.4% do total). 
+                            Esta visualização permite identificar o status atual das demandas e o volume de trabalho em cada fase.
+                        </p>
+                    </div>
+                    <h2>Distribuição de Demandas por Categoria</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="chartCategorias"></canvas>
+                    </div>
+                </div>
             </div>
             
             <div class="text-section">
@@ -471,7 +474,7 @@
                     <li><strong>Controle de Prazos:</strong> Todas as demandas com prazo estão em dia, sem vencimentos, demonstrando bom planejamento e execução.</li>
                     <li><strong>Distribuição de Trabalho:</strong> A categoria "Concluído" concentra a maior parte das demandas, indicando onde a equipe está mais focada.</li>
                     <li><strong>Demandas por Setor:</strong> O setor DAIT apresenta o maior volume de demandas, requerendo atenção especial da equipe.</li>
-                    <li><strong>Work in Progress:</strong> Com 23 demandas abertas, há um volume significativo de trabalho em andamento que requer acompanhamento contínuo.</li>
+                    <li><strong>Trabalho em Andamento:</strong> Com 23 demandas abertas, há um volume significativo de trabalho em andamento que requer acompanhamento contínuo.</li>
                 </ul>
                 <p>
                     Este relatório foi gerado automaticamente e reflete o estado atual do board no momento da extração dos dados. 
@@ -481,8 +484,7 @@
         </div>
         
         <div class="footer">
-            <p>Relatório gerado automaticamente a partir dos dados do Trello</p>
-            <p>Board: Equipe TI | Total de demandas: 116</p>
+            <p>© 2026 SISEC - Secretaria Socio Econômica. Todos os direitos reservados.</p>
         </div>
     </div>
     
@@ -502,74 +504,7 @@
             '#10b981'
         ];
         
-        // Gráfico 1: Demandas por Categoria (Pizza)
-        const ctxCategorias = document.getElementById('chartCategorias').getContext('2d');
-        new Chart(ctxCategorias, {
-            type: 'doughnut',
-            data: {
-                labels: ["Em andamento", "Recursos", "A fazer", "Pausado", "Concluído"],
-                datasets: [{
-                    data: [6, 5, 4, 4, 97],
-                    backgroundColor: cores.slice(0, 5),
-                    borderWidth: 1,
-                    borderColor: '#ffffff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right'
-                    },
-                    title: {
-                        display: false
-                    },
-                    datalabels: {
-                        color: '#fff',
-                        font: {
-                            weight: 'bold',
-                            size: 14
-                        },
-                        formatter: (value) => value > 0 ? value : ''
-                    }
-                }
-            }
-        });
-        
-        // Gráfico 2: Status das Demandas (Pizza)
-        const ctxStatus = document.getElementById('chartStatus').getContext('2d');
-        new Chart(ctxStatus, {
-            type: 'pie',
-            data: {
-                labels: ['Abertas', 'Fechadas'],
-                datasets: [{
-                    data: [23, 93],
-                    backgroundColor: ['#10b981', '#64748b'],
-                    borderWidth: 1,
-                    borderColor: '#ffffff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right'
-                    },
-                    datalabels: {
-                        color: '#fff',
-                        font: {
-                            weight: 'bold',
-                            size: 16
-                        },
-                        formatter: (value) => value > 0 ? value : ''
-                    }
-                }
-            }
-        });
-        
-        // Gráfico 3: Demandas por Setor (Pizza)
+        // Gráfico 1: Demandas por Setor (Pizza)
         const ctxSetores = document.getElementById('chartSetores').getContext('2d');
         new Chart(ctxSetores, {
             type: 'doughnut',
@@ -609,7 +544,7 @@
             }
         });
         
-        // Gráfico 6: Demandas por Setor (Abertas vs Fechadas)
+        // Gráfico 2: Demandas por Setor (Abertas vs Fechadas)
         const ctxSetoresStatus = document.getElementById('chartSetoresStatus').getContext('2d');
         new Chart(ctxSetoresStatus, {
             type: 'bar',
@@ -649,6 +584,73 @@
                         ticks: {
                             stepSize: 1
                         }
+                    }
+                }
+            }
+        });
+        
+        // Gráfico 3: Status das Demandas (Pizza)
+        const ctxStatus = document.getElementById('chartStatus').getContext('2d');
+        new Chart(ctxStatus, {
+            type: 'pie',
+            data: {
+                labels: ['Abertas', 'Fechadas'],
+                datasets: [{
+                    data: [23, 93],
+                    backgroundColor: ['#10b981', '#64748b'],
+                    borderWidth: 1,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    },
+                    datalabels: {
+                        color: '#fff',
+                        font: {
+                            weight: 'bold',
+                            size: 16
+                        },
+                        formatter: (value) => value > 0 ? value : ''
+                    }
+                }
+            }
+        });
+        
+        // Gráfico 4: Demandas por Categoria (Pizza)
+        const ctxCategorias = document.getElementById('chartCategorias').getContext('2d');
+        new Chart(ctxCategorias, {
+            type: 'doughnut',
+            data: {
+                labels: ["Em andamento", "A fazer", "Pausado", "Concluído"],
+                datasets: [{
+                    data: [6, 4, 4, 97],
+                    backgroundColor: ["#3b82f6", "#0ea5e9", "#6366f1", "#64748b"],
+                    borderWidth: 1,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    },
+                    title: {
+                        display: false
+                    },
+                    datalabels: {
+                        color: '#fff',
+                        font: {
+                            weight: 'bold',
+                            size: 14
+                        },
+                        formatter: (value) => value > 0 ? value : ''
                     }
                 }
             }
