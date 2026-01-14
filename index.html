@@ -37,6 +37,7 @@
             color: #ffffff;
             padding: 50px 60px;
             border-bottom: 4px solid #3b82f6;
+            text-align: center;
         }
         
         .header h1 {
@@ -65,6 +66,15 @@
             padding: 50px 60px;
             max-width: 100%;
             width: 100%;
+        }
+        
+        .section-title {
+            color: #1e293b;
+            font-size: 1.875em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
         }
         
         .stats-grid {
@@ -346,11 +356,11 @@
     <div class="container">
         <div class="header">
             <h1>Relatório de Demandas - Equipe TI</h1>
-            <p class="subtitle">Análise de Dados e Métricas de Performance</p>
-            <p class="date">Data de geração: 14/01/2026 às 14:40</p>
+            <p class="date">Data de geração: 14/01/2026 às 15:03</p>
         </div>
         
         <div class="content">
+            <h2 class="section-title">Análise de Dados e Métricas de Performance</h2>
             <div class="stats-grid">
                 <div class="stat-card">
                     <h3>116</h3>
@@ -434,10 +444,11 @@
                     <div class="chart-description">
                         <h3>Análise: Status das Demandas</h3>
                         <p>
-                            Este gráfico de pizza mostra a proporção entre demandas abertas e fechadas. 
-                            Atualmente, <strong>93 demandas (80.2%)</strong> estão fechadas, 
-                            enquanto <strong>23 demandas (19.8%)</strong> estão em andamento. 
-                            Este indicador é importante para avaliar a capacidade de entrega e o volume de trabalho em execução.
+                            Este gráfico apresenta a distribuição das demandas por status no Trello, mostrando onde estão as demandas: 
+                            se estão em andamento, se estão pausadas, se estão na lista "A fazer", ou se já foram finalizadas (concluídas). 
+                            A categoria <strong>Concluído</strong> concentra a maior quantidade de demandas, 
+                            com <strong>97 demandas</strong> (87.4% do total). 
+                            Este indicador é importante para avaliar o status atual das demandas e o volume de trabalho em cada fase.
                         </p>
                     </div>
                     <h2>Status Geral das Demandas</h2>
@@ -450,11 +461,10 @@
                     <div class="chart-description">
                         <h3>Análise: Demandas por Categoria</h3>
                         <p>
-                            Este gráfico apresenta a distribuição das demandas por status no Trello, mostrando onde estão as demandas: 
-                            se estão em andamento, se estão pausadas, ou se já foram finalizadas (concluídas). 
-                            A categoria <strong>Concluído</strong> concentra a maior quantidade de demandas, 
-                            com <strong>97 demandas</strong> (87.4% do total). 
-                            Esta visualização permite identificar o status atual das demandas e o volume de trabalho em cada fase.
+                            Este gráfico apresenta a distribuição das demandas por categoria de trabalho (DADOS, DESENVOLVIMENTO, DOCUMENTAÇÃO, SUPORTE). 
+                            A categoria <strong>DADOS</strong> concentra a maior quantidade de demandas, 
+                            com <strong>55 demandas</strong> (49.5% do total). 
+                            Esta visualização permite identificar quais áreas de trabalho demandam mais atenção da equipe.
                         </p>
                     </div>
                     <h2>Distribuição de Demandas por Categoria</h2>
@@ -472,7 +482,7 @@
                 <ul>
                     <li><strong>Taxa de Conclusão:</strong> A equipe demonstra uma boa capacidade de entrega, com 80.2% das demandas já concluídas.</li>
                     <li><strong>Controle de Prazos:</strong> Todas as demandas com prazo estão em dia, sem vencimentos, demonstrando bom planejamento e execução.</li>
-                    <li><strong>Distribuição de Trabalho:</strong> A categoria "Concluído" concentra a maior parte das demandas, indicando onde a equipe está mais focada.</li>
+                    <li><strong>Distribuição de Trabalho:</strong> A categoria "DADOS" concentra a maior parte das demandas, indicando onde a equipe está mais focada.</li>
                     <li><strong>Demandas por Setor:</strong> O setor DAIT apresenta o maior volume de demandas, requerendo atenção especial da equipe.</li>
                     <li><strong>Trabalho em Andamento:</strong> Com 23 demandas abertas, há um volume significativo de trabalho em andamento que requer acompanhamento contínuo.</li>
                 </ul>
@@ -594,10 +604,10 @@
         new Chart(ctxStatus, {
             type: 'pie',
             data: {
-                labels: ['Abertas', 'Fechadas'],
+                labels: ["Em andamento", "A fazer", "Pausado", "Concluído"],
                 datasets: [{
-                    data: [23, 93],
-                    backgroundColor: ['#10b981', '#64748b'],
+                    data: [6, 4, 4, 97],
+                    backgroundColor: ["#3b82f6", "#0ea5e9", "#6366f1", "#64748b"],
                     borderWidth: 1,
                     borderColor: '#ffffff'
                 }]
@@ -626,10 +636,10 @@
         new Chart(ctxCategorias, {
             type: 'doughnut',
             data: {
-                labels: ["Em andamento", "A fazer", "Pausado", "Concluído"],
+                labels: ["DADOS", "DESENVOLVIMENTO", "DOCUMENTAÇÃO", "SUPORTE"],
                 datasets: [{
-                    data: [6, 4, 4, 97],
-                    backgroundColor: ["#3b82f6", "#0ea5e9", "#6366f1", "#64748b"],
+                    data: [55, 14, 16, 26],
+                    backgroundColor: ["rgba(155, 89, 182, 0.8)", "rgba(26, 188, 156, 0.8)", "rgba(230, 126, 34, 0.8)", "rgba(192, 57, 43, 0.8)"],
                     borderWidth: 1,
                     borderColor: '#ffffff'
                 }]
