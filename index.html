@@ -147,6 +147,62 @@
             border: 1px solid #e2e8f0;
         }
         
+        .categorias-table {
+            width: auto;
+            max-width: 600px;
+            border-collapse: collapse;
+            margin: 30px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .categorias-table thead {
+            background: #1e293b;
+            color: #ffffff;
+        }
+        
+        .categorias-table th {
+            padding: 16px 24px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .categorias-table tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+            transition: background-color 0.2s ease;
+        }
+        
+        .categorias-table tbody tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        .categorias-table tbody tr:last-child {
+            border-bottom: none;
+        }
+        
+        .categorias-table td {
+            padding: 16px 24px;
+            color: #475569;
+            font-size: 1em;
+        }
+        
+        .categorias-table td:first-child {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .categorias-table td:last-child {
+            text-align: right;
+            font-weight: 700;
+            color: #3b82f6;
+            font-size: 1.1em;
+        }
+        
         .text-section h2 {
             color: #1e293b;
             font-size: 1.625em;
@@ -314,6 +370,21 @@
                 padding: 20px;
             }
             
+            .categorias-table {
+                width: 100%;
+                max-width: 100%;
+                font-size: 0.9em;
+            }
+            
+            .categorias-table th,
+            .categorias-table td {
+                padding: 12px 16px;
+            }
+            
+            .section-title {
+                font-size: 1.5em;
+            }
+            
             .footer {
                 padding: 20px 16px;
                 font-size: 0.85em;
@@ -333,21 +404,82 @@
                 padding: 20px 12px;
             }
             
+            .section-title {
+                font-size: 1.3em;
+                margin-bottom: 20px;
+            }
+            
             .stats-grid {
                 grid-template-columns: 1fr;
                 gap: 12px;
+            }
+            
+            .stat-card {
+                padding: 16px 12px;
             }
             
             .stat-card h3 {
                 font-size: 1.75em;
             }
             
+            .stat-card p {
+                font-size: 0.8em;
+            }
+            
             .chart-wrapper {
                 height: 250px;
             }
             
+            .chart-container {
+                padding: 16px;
+            }
+            
+            .chart-container h2 {
+                font-size: 1.1em;
+            }
+            
             .text-section {
                 padding: 20px 16px;
+            }
+            
+            .text-section h2 {
+                font-size: 1.2em;
+            }
+            
+            .text-section p {
+                font-size: 0.9em;
+            }
+            
+            .categorias-table {
+                width: 100%;
+                max-width: 100%;
+                font-size: 0.85em;
+                margin: 20px 0;
+            }
+            
+            .categorias-table th,
+            .categorias-table td {
+                padding: 10px 12px;
+            }
+            
+            .categorias-table th {
+                font-size: 0.85em;
+            }
+            
+            .categorias-table td:last-child {
+                font-size: 1em;
+            }
+            
+            .chart-description {
+                padding: 12px;
+            }
+            
+            .chart-description h3 {
+                font-size: 1em;
+            }
+            
+            .chart-description p {
+                font-size: 0.85em;
             }
         }
     </style>
@@ -356,7 +488,8 @@
     <div class="container">
         <div class="header">
             <h1>Relatório de Demandas - Equipe TI</h1>
-            <p class="date">Data de geração: 14/01/2026 às 15:03</p>
+            <p class="subtitle">Análise de Dados e Métricas de Performance</p>
+            <p class="date">Data de geração: 14/01/2026 às 15:27</p>
         </div>
         
         <div class="content">
@@ -472,6 +605,47 @@
                         <canvas id="chartCategorias"></canvas>
                     </div>
                 </div>
+            </div>
+            
+            <div class="text-section">
+                <h2>Categorias Mais Recorrentes</h2>
+                <p style="margin-bottom: 30px;">
+                    Com base na análise dos nomes das demandas, as seguintes categorias/temas aparecem com maior frequência:
+                </p>
+                <table class="categorias-table">
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th style="text-align: right;">Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Batimento</td>
+                            <td>20 demandas</td>
+                        </tr>
+                        <tr>
+                            <td>Suporte</td>
+                            <td>15 demandas</td>
+                        </tr>
+                        <tr>
+                            <td>Relatórios</td>
+                            <td>13 demandas</td>
+                        </tr>
+                        <tr>
+                            <td>Reuniões</td>
+                            <td>6 demandas</td>
+                        </tr>
+                        <tr>
+                            <td>CadÚnico/Cadastro</td>
+                            <td>4 demandas</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <p style="margin-top: 30px;">
+                    Esta análise permite identificar quais tipos de trabalho são mais frequentes e demandam mais atenção da equipe.
+                </p>
             </div>
             
             <div class="text-section">
