@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Trello - Equipe TI</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #ffffff;
+            padding: 0;
+            margin: 0;
+            color: #1a1a1a;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            margin: 0;
+            background: #ffffff;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #1e293b;
+            color: #ffffff;
+            padding: 50px 60px;
+            border-bottom: 4px solid #3b82f6;
+        }
+        
+        .header h1 {
+            font-size: 2.25em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.125em;
+            font-weight: 400;
+            color: #cbd5e1;
+            margin-bottom: 4px;
+        }
+        
+        .header .date {
+            font-size: 0.95em;
+            font-weight: 400;
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+        
+        .content {
+            padding: 50px 60px;
+            max-width: 100%;
+            width: 100%;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+        
+        .stat-card {
+            background: #ffffff;
+            padding: 28px 24px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .stat-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+        }
+        
+        .stat-card h3 {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+        
+        .stat-card p {
+            color: #64748b;
+            font-size: 0.95em;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(580px, 1fr));
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+        
+        .chart-container {
+            background: #ffffff;
+            padding: 32px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .chart-container h2 {
+            color: #1e293b;
+            font-size: 1.375em;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-align: left;
+            letter-spacing: -0.3px;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+        }
+        
+        .text-section {
+            background: #f8fafc;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .text-section h2 {
+            color: #1e293b;
+            font-size: 1.625em;
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e2e8f0;
+            letter-spacing: -0.3px;
+        }
+        
+        .text-section p {
+            color: #475569;
+            font-size: 1em;
+            line-height: 1.75;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+        
+        .text-section ul {
+            color: #475569;
+            font-size: 1em;
+            line-height: 1.75;
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .text-section li {
+            margin-bottom: 12px;
+        }
+        
+        .highlight-box {
+            background: #1e293b;
+            color: #ffffff;
+            padding: 24px 28px;
+            margin: 24px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .highlight-box strong {
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+        
+        .chart-description {
+            background: #f8fafc;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+            border-left: 3px solid #3b82f6;
+        }
+        
+        .chart-description h3 {
+            color: #1e293b;
+            font-size: 1.125em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.2px;
+        }
+        
+        .chart-description p {
+            color: #475569;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+        
+        .footer {
+            background: #1e293b;
+            color: #cbd5e1;
+            padding: 24px;
+            text-align: center;
+            border-top: 1px solid #334155;
+            font-size: 0.9em;
+        }
+        
+        .footer p {
+            margin: 4px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 24px 16px;
+            }
+            
+            .header {
+                padding: 32px 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.75em;
+            }
+            
+            .header .subtitle {
+                font-size: 1em;
+            }
+            
+            .header .date {
+                font-size: 0.875em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            
+            .stat-card {
+                padding: 20px 16px;
+            }
+            
+            .stat-card h3 {
+                font-size: 2em;
+            }
+            
+            .stat-card p {
+                font-size: 0.85em;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .chart-container {
+                padding: 20px;
+            }
+            
+            .chart-container h2 {
+                font-size: 1.2em;
+            }
+            
+            .chart-wrapper {
+                height: 300px;
+            }
+            
+            .text-section {
+                padding: 24px 20px;
+            }
+            
+            .text-section h2 {
+                font-size: 1.4em;
+            }
+            
+            .text-section p {
+                font-size: 0.95em;
+                text-align: left;
+            }
+            
+            .text-section ul {
+                margin-left: 20px;
+                font-size: 0.95em;
+            }
+            
+            .chart-description {
+                padding: 16px;
+            }
+            
+            .chart-description h3 {
+                font-size: 1.05em;
+            }
+            
+            .chart-description p {
+                font-size: 0.9em;
+            }
+            
+            .highlight-box {
+                padding: 20px;
+            }
+            
+            .footer {
+                padding: 20px 16px;
+                font-size: 0.85em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 24px 16px;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .content {
+                padding: 20px 12px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .stat-card h3 {
+                font-size: 1.75em;
+            }
+            
+            .chart-wrapper {
+                height: 250px;
+            }
+            
+            .text-section {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Relatório de Demandas - Equipe TI</h1>
+            <p class="subtitle">Análise de Dados e Métricas de Performance</p>
+            <p class="date">Data de geração: 14/01/2026 às 11:55</p>
+        </div>
+        
+        <div class="content">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>116</h3>
+                    <p>Total de Demandas</p>
+                </div>
+                <div class="stat-card">
+                    <h3>23</h3>
+                    <p>Demandas Abertas</p>
+                </div>
+                <div class="stat-card">
+                    <h3>93</h3>
+                    <p>Demandas Fechadas</p>
+                </div>
+                <div class="stat-card">
+                    <h3>14</h3>
+                    <p>Com Prazo</p>
+                </div>
+                <div class="stat-card">
+                    <h3>0</h3>
+                    <p>Vencidas</p>
+                </div>
+                <div class="stat-card">
+                    <h3>99</h3>
+                    <p>Concluídas</p>
+                </div>
+            </div>
+            
+            <div class="text-section">
+                <h2>Resumo Executivo</h2>
+                <p>
+                    Este relatório apresenta uma análise completa das demandas gerenciadas pela <strong>Equipe TI</strong> no Trello. 
+                    O documento foi gerado automaticamente a partir dos dados extraídos do board e apresenta métricas importantes 
+                    sobre o trabalho realizado pela equipe.
+                </p>
+                <div class="highlight-box">
+                    <strong>Principais Indicadores:</strong><br>
+                    O board possui <strong>116 demandas</strong> no total, sendo <strong>23 demandas abertas</strong> 
+                    (19.8%) e <strong>93 demandas fechadas</strong> (80.2%). 
+                    A taxa de conclusão atual é de <strong>80.2%</strong>, demonstrando um bom nível de entrega da equipe.
+                </div>
+                <p>
+                    Entre as demandas com prazo definido (14 no total), todas estão em dia, 
+                    sem nenhuma demanda vencida no momento. Isso indica um bom controle de prazos e cumprimento dos compromissos assumidos.
+                </p>
+            </div>
+            
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-description">
+                        <h3>Análise: Demandas por Categoria</h3>
+                        <p>
+                            Este gráfico apresenta a distribuição das demandas por categoria/lista do Trello. 
+                            A categoria <strong>Concluído</strong> concentra a maior quantidade de demandas, 
+                            com <strong>97 demandas</strong> (83.6% do total). 
+                            Esta visualização ajuda a identificar onde a equipe está mais focada e quais áreas demandam mais atenção.
+                        </p>
+                    </div>
+                    <h2>Distribuição de Demandas por Categoria</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="chartCategorias"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-description">
+                        <h3>Análise: Status das Demandas</h3>
+                        <p>
+                            Este gráfico de pizza mostra a proporção entre demandas abertas e fechadas. 
+                            Atualmente, <strong>93 demandas (80.2%)</strong> estão fechadas, 
+                            enquanto <strong>23 demandas (19.8%)</strong> estão em andamento. 
+                            Este indicador é importante para avaliar a capacidade de entrega e o volume de trabalho em execução.
+                        </p>
+                    </div>
+                    <h2>Status Geral das Demandas</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="chartStatus"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-description">
+                        <h3>Análise: Demandas por Setor</h3>
+                        <p>
+                            Este gráfico apresenta a distribuição das demandas entre os setores: DAIT, GABINETE, NAG e DAE. 
+                            O setor <strong>DAIT</strong> possui a maior quantidade de demandas, 
+                            com <strong>64 demandas</strong> (62.1% do total de demandas por setor). 
+                            Esta análise permite identificar quais setores demandam mais atenção da equipe de TI.
+                        </p>
+                    </div>
+                    <h2>Distribuição de Demandas por Setor Organizacional</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="chartSetores"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-description">
+                        <h3>Análise Comparativa: Status das Demandas por Setor</h3>
+                        <p>
+                            Este gráfico de barras compara a quantidade de demandas abertas e fechadas em cada setor. 
+                            Permite identificar quais setores têm mais pendências e quais já completaram a maioria de suas demandas. 
+                            A análise deste gráfico ajuda a priorizar esforços e identificar possíveis gargalos por setor.
+                        </p>
+                    </div>
+                    <h2>Análise Comparativa: Demandas Abertas vs Fechadas por Setor</h2>
+                    <div class="chart-wrapper">
+                        <canvas id="chartSetoresStatus"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-section">
+                <h2>Análise Detalhada e Recomendações</h2>
+                <p>
+                    Com base nos dados apresentados, é possível extrair algumas conclusões importantes sobre o trabalho da equipe:
+                </p>
+                <ul>
+                    <li><strong>Taxa de Conclusão:</strong> A equipe demonstra uma boa capacidade de entrega, com 80.2% das demandas já concluídas.</li>
+                    <li><strong>Controle de Prazos:</strong> Todas as demandas com prazo estão em dia, sem vencimentos, demonstrando bom planejamento e execução.</li>
+                    <li><strong>Distribuição de Trabalho:</strong> A categoria "Concluído" concentra a maior parte das demandas, indicando onde a equipe está mais focada.</li>
+                    <li><strong>Demandas por Setor:</strong> O setor DAIT apresenta o maior volume de demandas, requerendo atenção especial da equipe.</li>
+                    <li><strong>Work in Progress:</strong> Com 23 demandas abertas, há um volume significativo de trabalho em andamento que requer acompanhamento contínuo.</li>
+                </ul>
+                <p>
+                    Este relatório foi gerado automaticamente e reflete o estado atual do board no momento da extração dos dados. 
+                    Recomenda-se a geração periódica deste relatório para acompanhamento da evolução dos indicadores ao longo do tempo.
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Relatório gerado automaticamente a partir dos dados do Trello</p>
+            <p>Board: Equipe TI | Total de demandas: 116</p>
+        </div>
+    </div>
+    
+    <script>
+        // Registra o plugin de datalabels
+        Chart.register(ChartDataLabels);
+        
+        // Cores profissionais para os gráficos
+        const cores = [
+            '#3b82f6',
+            '#64748b',
+            '#0ea5e9',
+            '#6366f1',
+            '#8b5cf6',
+            '#ec4899',
+            '#f59e0b',
+            '#10b981'
+        ];
+        
+        // Gráfico 1: Demandas por Categoria (Pizza)
+        const ctxCategorias = document.getElementById('chartCategorias').getContext('2d');
+        new Chart(ctxCategorias, {
+            type: 'doughnut',
+            data: {
+                labels: ["Em andamento", "Recursos", "A fazer", "Pausado", "Concluído"],
+                datasets: [{
+                    data: [6, 5, 4, 4, 97],
+                    backgroundColor: cores.slice(0, 5),
+                    borderWidth: 1,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    },
+                    title: {
+                        display: false
+                    },
+                    datalabels: {
+                        color: '#fff',
+                        font: {
+                            weight: 'bold',
+                            size: 14
+                        },
+                        formatter: (value) => value > 0 ? value : ''
+                    }
+                }
+            }
+        });
+        
+        // Gráfico 2: Status das Demandas (Pizza)
+        const ctxStatus = document.getElementById('chartStatus').getContext('2d');
+        new Chart(ctxStatus, {
+            type: 'pie',
+            data: {
+                labels: ['Abertas', 'Fechadas'],
+                datasets: [{
+                    data: [23, 93],
+                    backgroundColor: ['#10b981', '#64748b'],
+                    borderWidth: 1,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    },
+                    datalabels: {
+                        color: '#fff',
+                        font: {
+                            weight: 'bold',
+                            size: 16
+                        },
+                        formatter: (value) => value > 0 ? value : ''
+                    }
+                }
+            }
+        });
+        
+        // Gráfico 3: Demandas por Setor (Pizza)
+        const ctxSetores = document.getElementById('chartSetores').getContext('2d');
+        new Chart(ctxSetores, {
+            type: 'doughnut',
+            data: {
+                labels: ["DAIT", "GABINETE", "NAG", "DAE"],
+                datasets: [{
+                    data: [64, 6, 9, 24],
+                    backgroundColor: [
+                        'rgba(46, 204, 113, 0.8)',
+                        'rgba(52, 152, 219, 0.8)',
+                        'rgba(241, 196, 15, 0.8)',
+                        'rgba(231, 76, 60, 0.8)'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    },
+                    title: {
+                        display: false
+                    },
+                    datalabels: {
+                        color: '#fff',
+                        font: {
+                            weight: 'bold',
+                            size: 14
+                        },
+                        formatter: (value) => value > 0 ? value : ''
+                    }
+                }
+            }
+        });
+        
+        // Gráfico 6: Demandas por Setor (Abertas vs Fechadas)
+        const ctxSetoresStatus = document.getElementById('chartSetoresStatus').getContext('2d');
+        new Chart(ctxSetoresStatus, {
+            type: 'bar',
+            data: {
+                labels: ["DAIT", "GABINETE", "NAG", "DAE"],
+                datasets: [{
+                    label: 'Abertas',
+                    data: [13, 1, 2, 5],
+                    backgroundColor: '#10b981'
+                }, {
+                    label: 'Fechadas',
+                    data: [51, 5, 7, 19],
+                    backgroundColor: '#64748b'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        color: '#333',
+                        font: {
+                            weight: 'bold',
+                            size: 12
+                        },
+                        formatter: (value) => value > 0 ? value : ''
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
