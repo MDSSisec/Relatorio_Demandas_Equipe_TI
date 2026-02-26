@@ -6,6 +6,7 @@
     <title>Relatório Trello - Equipe TI</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
@@ -281,6 +282,36 @@
             margin: 4px 0;
         }
         
+        .download-pdf-section {
+            background: #f8fafc;
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .download-pdf-btn {
+            background: #3b82f6;
+            color: #ffffff;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .download-pdf-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .download-pdf-btn:active {
+            transform: translateY(0);
+        }
+        
         @media (max-width: 768px) {
             .content {
                 padding: 24px 16px;
@@ -385,6 +416,15 @@
                 font-size: 1.5em;
             }
             
+            .download-pdf-section {
+                padding: 30px 20px;
+            }
+            
+            .download-pdf-btn {
+                padding: 14px 28px;
+                font-size: 1em;
+            }
+            
             .footer {
                 padding: 20px 16px;
                 font-size: 0.85em;
@@ -470,6 +510,16 @@
                 font-size: 1em;
             }
             
+            .download-pdf-section {
+                padding: 24px 16px;
+            }
+            
+            .download-pdf-btn {
+                padding: 12px 24px;
+                font-size: 0.95em;
+                width: 100%;
+            }
+            
             .chart-description {
                 padding: 12px;
             }
@@ -488,34 +538,35 @@
     <div class="container">
         <div class="header">
             <h1>Relatório de Demandas - Equipe TI</h1>
-            <p class="date">Data de geração: 14/01/2026 às 15:27</p>
+            <p class="subtitle">Análise de Dados e Métricas de Performance</p>
+            <p class="date">Data de geração: 26/02/2026 às 11:15</p>
         </div>
         
         <div class="content">
             <h2 class="section-title">Análise de Dados e Métricas de Performance</h2>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <h3>116</h3>
+                    <h3>185</h3>
                     <p>Total de Demandas</p>
                 </div>
                 <div class="stat-card">
-                    <h3>23</h3>
+                    <h3>20</h3>
                     <p>Demandas Abertas</p>
                 </div>
                 <div class="stat-card">
-                    <h3>93</h3>
+                    <h3>165</h3>
                     <p>Demandas Fechadas</p>
                 </div>
                 <div class="stat-card">
-                    <h3>14</h3>
+                    <h3>15</h3>
                     <p>Com Prazo</p>
                 </div>
                 <div class="stat-card">
-                    <h3>0</h3>
+                    <h3>1</h3>
                     <p>Vencidas</p>
                 </div>
                 <div class="stat-card">
-                    <h3>99</h3>
+                    <h3>153</h3>
                     <p>Concluídas</p>
                 </div>
             </div>
@@ -529,12 +580,12 @@
                 </p>
                 <div class="highlight-box">
                     <strong>Principais Indicadores:</strong><br>
-                    O board possui <strong>116 demandas</strong> no total, sendo <strong>23 demandas abertas</strong> 
-                    (19.8%) e <strong>93 demandas fechadas</strong> (80.2%). 
-                    A taxa de conclusão atual é de <strong>80.2%</strong>, demonstrando um bom nível de entrega da equipe.
+                    O board possui <strong>185 demandas</strong> no total, sendo <strong>20 demandas abertas</strong> 
+                    (10.8%) e <strong>165 demandas fechadas</strong> (89.2%). 
+                    A taxa de conclusão atual é de <strong>89.2%</strong>, demonstrando um bom nível de entrega da equipe.
                 </div>
                 <p>
-                    Entre as demandas com prazo definido (14 no total), todas estão em dia, 
+                    Entre as demandas com prazo definido (15 no total), todas estão em dia, 
                     sem nenhuma demanda vencida no momento. Isso indica um bom controle de prazos e cumprimento dos compromissos assumidos.
                 </p>
             </div>
@@ -546,8 +597,8 @@
                         <p>
                             Este gráfico apresenta a distribuição das demandas entre os setores: DAIT, GABINETE, NAG e DAE. 
                             O setor <strong>DAIT</strong> possui a maior quantidade de demandas, 
-                            com <strong>64 demandas</strong> (62.1% do total de demandas por setor). 
-                            Em segundo lugar, o setor <strong>DAE</strong> possui <strong>24 demandas</strong> (23.3% do total de demandas por setor). 
+                            com <strong>104 demandas</strong> (66.7% do total de demandas por setor). 
+                            Em segundo lugar, o setor <strong>DAE</strong> possui <strong>33 demandas</strong> (21.2% do total de demandas por setor). 
                             Esta análise permite identificar quais setores demandam mais atenção da equipe de TI.
                         </p>
                     </div>
@@ -579,7 +630,7 @@
                             Este gráfico apresenta a distribuição das demandas por status no Trello, mostrando onde estão as demandas: 
                             se estão em andamento, se estão pausadas, se estão na lista "A fazer", ou se já foram finalizadas (concluídas). 
                             A categoria <strong>Concluído</strong> concentra a maior quantidade de demandas, 
-                            com <strong>97 demandas</strong> (87.4% do total). 
+                            com <strong>166 demandas</strong> (92.2% do total). 
                             Este indicador é importante para avaliar o status atual das demandas e o volume de trabalho em cada fase.
                         </p>
                     </div>
@@ -595,7 +646,7 @@
                         <p>
                             Este gráfico apresenta a distribuição das demandas por categoria de trabalho (DADOS, DESENVOLVIMENTO, DOCUMENTAÇÃO, SUPORTE). 
                             A categoria <strong>DADOS</strong> concentra a maior quantidade de demandas, 
-                            com <strong>55 demandas</strong> (49.5% do total). 
+                            com <strong>71 demandas</strong> (43.3% do total). 
                             Esta visualização permite identificar quais áreas de trabalho demandam mais atenção da equipe.
                         </p>
                     </div>
@@ -620,24 +671,24 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Batimento</td>
-                            <td>20 demandas</td>
+                            <td>Suporte</td>
+                            <td>28 demandas</td>
                         </tr>
                         <tr>
-                            <td>Suporte</td>
-                            <td>15 demandas</td>
+                            <td>Batimento</td>
+                            <td>26 demandas</td>
                         </tr>
                         <tr>
                             <td>Relatórios</td>
-                            <td>13 demandas</td>
+                            <td>21 demandas</td>
                         </tr>
                         <tr>
                             <td>Reuniões</td>
-                            <td>6 demandas</td>
+                            <td>12 demandas</td>
                         </tr>
                         <tr>
-                            <td>CadÚnico/Cadastro</td>
-                            <td>4 demandas</td>
+                            <td>Ouvidoria</td>
+                            <td>6 demandas</td>
                         </tr>
 
                     </tbody>
@@ -653,17 +704,21 @@
                     Com base nos dados apresentados, é possível extrair algumas conclusões importantes sobre o trabalho da equipe:
                 </p>
                 <ul>
-                    <li><strong>Taxa de Conclusão:</strong> A equipe demonstra uma boa capacidade de entrega, com 80.2% das demandas já concluídas.</li>
+                    <li><strong>Taxa de Conclusão:</strong> A equipe demonstra uma boa capacidade de entrega, com 89.2% das demandas já concluídas.</li>
                     <li><strong>Controle de Prazos:</strong> Todas as demandas com prazo estão em dia, sem vencimentos, demonstrando bom planejamento e execução.</li>
                     <li><strong>Distribuição de Trabalho:</strong> A categoria "DADOS" concentra a maior parte das demandas, indicando onde a equipe está mais focada.</li>
                     <li><strong>Demandas por Setor:</strong> O setor DAIT apresenta o maior volume de demandas, requerendo atenção especial da equipe.</li>
-                    <li><strong>Trabalho em Andamento:</strong> Com 23 demandas abertas, há um volume significativo de trabalho em andamento que requer acompanhamento contínuo.</li>
+                    <li><strong>Trabalho em Andamento:</strong> Com 20 demandas abertas, há um volume significativo de trabalho em andamento que requer acompanhamento contínuo.</li>
                 </ul>
                 <p>
                     Este relatório foi gerado automaticamente e reflete o estado atual do board no momento da extração dos dados. 
                     Recomenda-se a geração periódica deste relatório para acompanhamento da evolução dos indicadores ao longo do tempo.
                 </p>
             </div>
+        </div>
+        
+        <div class="download-pdf-section">
+            <button class="download-pdf-btn" onclick="downloadPDF()">📥 Baixar Relatório em PDF</button>
         </div>
         
         <div class="footer">
@@ -694,7 +749,7 @@
             data: {
                 labels: ["DAIT", "GABINETE", "NAG", "DAE"],
                 datasets: [{
-                    data: [64, 6, 9, 24],
+                    data: [104, 9, 10, 33],
                     backgroundColor: [
                         'rgba(46, 204, 113, 0.8)',
                         'rgba(52, 152, 219, 0.8)',
@@ -735,11 +790,11 @@
                 labels: ["DAIT", "GABINETE", "NAG", "DAE"],
                 datasets: [{
                     label: 'Abertas',
-                    data: [13, 1, 2, 5],
+                    data: [11, 1, 3, 3],
                     backgroundColor: '#10b981'
                 }, {
                     label: 'Fechadas',
-                    data: [51, 5, 7, 19],
+                    data: [93, 8, 7, 30],
                     backgroundColor: '#64748b'
                 }]
             },
@@ -777,10 +832,10 @@
         new Chart(ctxStatus, {
             type: 'pie',
             data: {
-                labels: ["Em andamento", "A fazer", "Pausado", "Concluído"],
+                labels: ["Em andamento", "Concluído", "A fazer", "Pausado", "Semana que vem"],
                 datasets: [{
-                    data: [6, 4, 4, 97],
-                    backgroundColor: ["#3b82f6", "#0ea5e9", "#6366f1", "#64748b"],
+                    data: [3, 166, 1, 7, 3],
+                    backgroundColor: ["#3b82f6", "#64748b", "#0ea5e9", "#6366f1", "#8b5cf6"],
                     borderWidth: 1,
                     borderColor: '#ffffff'
                 }]
@@ -811,7 +866,7 @@
             data: {
                 labels: ["DADOS", "DESENVOLVIMENTO", "DOCUMENTAÇÃO", "SUPORTE"],
                 datasets: [{
-                    data: [55, 14, 16, 26],
+                    data: [71, 23, 28, 42],
                     backgroundColor: ["rgba(155, 89, 182, 0.8)", "rgba(26, 188, 156, 0.8)", "rgba(230, 126, 34, 0.8)", "rgba(192, 57, 43, 0.8)"],
                     borderWidth: 1,
                     borderColor: '#ffffff'
@@ -838,6 +893,34 @@
                 }
             }
         });
+        
+        // Função para baixar PDF
+        function downloadPDF() {
+            const button = document.querySelector('.download-pdf-btn');
+            const originalText = button.textContent;
+            button.textContent = '⏳ Gerando PDF...';
+            button.disabled = true;
+            
+            const element = document.querySelector('.container');
+            const dataAtual = new Date().toISOString().split('T')[0].replace(/-/g, '');
+            const nomeArquivo = 'relatorio_trello_' + dataAtual + '.pdf';
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: nomeArquivo,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                button.textContent = originalText;
+                button.disabled = false;
+            }).catch(() => {
+                button.textContent = originalText;
+                button.disabled = false;
+                alert('Erro ao gerar PDF. Por favor, tente novamente.');
+            });
+        }
     </script>
 </body>
 </html>
